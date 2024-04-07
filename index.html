@@ -6,21 +6,18 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <script src="https://cdn.tailwindcss.com"></script>
-    <script
-    type="module"
-    src="https://cdn.jsdelivr.net/gh/zerodevx/zero-md@2/dist/zero-md.min.js"
-  ></script>
-  <style type="text/css">
-    .pseudolink { 
-       color: #0366d6; 
-       text-decoration:underline; 
-       cursor:pointer; 
-       }
+    <script type="module" src="https://cdn.jsdelivr.net/gh/zerodevx/zero-md@2/dist/zero-md.min.js"></script>
+    <style type="text/css">
+        .pseudolink {
+            color: #0366d6;
+            text-decoration: underline;
+            cursor: pointer;
+        }
     </style>
-    
-    
-    <!-- <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/gh/creativetimofficial/tailwind-starter-kit/compiled-tailwind.min.css" /> -->
+
+    <!-- Svg Favicon -->
+    <link rel="icon" type="image/svg" href="/eacc-icon.svg" />
+
 </head>
 
 <body class="text-gray-300 antialiased bg-gray-800">
@@ -32,89 +29,41 @@
 
         const {
             ol, h1, "zero-md": zeroMd, template, style,
-            a, body, button, canvas, div, footer, form, h2, h3, h5, h6, head, hr, html, i, img, input, li, link, meta, nav, noscript, p, script, span, table, tbody, td, th, thead, title, tr, ul
+            a, body, button, canvas, div, footer, form,
+            h2, h3, h5, h6, head, hr, html, i, img, input,
+            li, link, meta, nav, noscript, p, script, span,
+            table, tbody, td, th, thead, title, tr, ul
         } = van.tags;
 
         const contentSegment = div.pt4.borderGray700.borderT.m3;
-        const searchSegment = () => div.rounded.p4.bgGray700(
-            div.mb4.itemsCenter.justifyBetween.flex(
-                div.fontMedium.textLg("Search results"),
-                div.spaceX2.itemsCenter.flex(
-                    button.textGray400(
-                        i.faSave.fas(
-                        ),
-                    ),
-                    button.textGray400(
-                        i.faPrint.fas(
-                        ),
-                    ),
-                    button.textGray400(
-                        i.faShareAlt.fas(
-                        ),
-                    ),
-                    button.textGray400(
-                        i.faEllipsisV.fas(
-                        ),
-                    ),
-                ),
-            ),
-            div.mb4.textSm("55 notes found\n  "),
-            div.mb4.spaceX4.flex(
-                button.rounded.py1.px3.textGray400.bgGray600("URLs"),
-                button.rounded.py1.px3.textGray400.bgGray600("Attachments"),
-                button.rounded.py1.px3.textGray400.bgGray600("Images"),
-                button.rounded.py1.px3.textGray400.bgGray600("Webclips"),
-            ),
-            div.pt4.borderGray600.borderT(
-                div.textGray400.textSm("server is on!!!!!!! buy items? Find out what sensors..."),
-                div.textGray400.textSm("Dec 27, 2023"),
-            ),
-            div.pt4.borderGray600.borderT(
-                div.textGray400.textSm("CARD GAME GRAFTWORLD? ///////////// each card has 4 connections (more than 1 connection possible?) arena is ar-..."),
-                div.textGray400.textSm("Oct 14, 2023"),
-            ),
-        );
-        const titleSegment = () => div.rounded.p4.bgGray700.contentCenter.itemsCenter.textCenter.justifyCenter.flex(
+        const pseudolink = (href, text) => span.truncate.textBlue400.textSm["hover:text-blue-300 hover:underline cursor-pointer"]({
+                            href,
+                            title: href,
+                            onclick: () => {
+                                window.location.href = href;
+                            }
+                        }, text);
+        const titleSegment = () => div.rounded.p4.bgGray700.contentCenter.
+        itemsCenter.textCenter.justifyCenter.flex(
             h1.text6xl.selfCenter("Seattle E/ACC Meetup")
         )
 
         const menuSegment = () => div.spaceY4.p4.bgGray900.w64(
-            // div.spaceX2.itemsCenter.flex(
-            //     img.roundedFull({ alt: "User profile placeholder image", height: "32", src: "https://oaidalleapiprodscus.blob.core.windows.net/private/org-WYsfA75xWPZQIuZvAk0tvlgB/user-vSmAXNdyNVv3vUOVHSq3B0tq/img-fgKFJvanaz4BWeIjujiiEx78.png?st=2024-03-28T07%3A00%3A42Z&se=2024-03-28T09%3A00%3A42Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-03-27T17%3A42%3A57Z&ske=2024-03-28T17%3A42%3A57Z&sks=b&skv=2021-08-06&sig=jSuTX24uUFvk2vhitYo2b9zNHjyevoCP/Ac7b6UJNEE%3D", width: "32" }),
-            //     span("u0g2vv7fspq@opaya.co\n  "),
-            // ),
-            // contentSegment(
-            //     button.spaceX2.itemsCenter.flex.rounded.py2.px4.textWhite.bgGreen500(
-            //         i.faPlus.fas(
-            //         ),
-            //         span("New Note"),
-            //     ),
-            // ),
+
             contentSegment(
                 div.textGray400("Events"),
                 div.spaceY1.p2(
                     div.truncate.textSm("Hike 4/9"),
                 ),
-                // div.textSm("Who Are We?"),
             ),
             contentSegment(
                 div.textGray400("Other Links"),
                 div.spaceY1.p2(
                     div(
-                        span.truncate.textSm.pseudolink({
-                        href: "https://www.you2date.com",
-                        onclick: () => {
-                            window.location.href = "https://www.you2date.com";
-                        }
-                    },"You2Date")
+                        pseudolink("https://www.you2date.com", "You2Date")
                     ),
                     div(
-                        span.truncate.textSm.pseudolink({
-                        href: "https://www.sobelstoryboard.com",
-                        onclick: () => {
-                            window.location.href = "https://www.sobelstoryboard.com";
-                        }
-                    },"Sobel Storyboard")
+                        pseudolink("https://www.sobelstoryboard.com", "Sobel Storyboard")
                     ),
                 ),
             ),
@@ -131,76 +80,8 @@
             //     div.textSm("Need a little help?\n  "),
             // ),
         );
-        // const noteSegment = () => div.mt4.rounded.p4.bgGray700(
-        //     div.mb4.itemsCenter.justifyBetween.flex(
-        //         div.spaceX2.itemsCenter.flex(
-        //             button.textGray400(
-        //                 i.faBook.fas(
-        //                 ),
-        //             ),
-        //             div.fontMedium.textLg("My Notebook"),
-        //         ),
-        //         div.textGray400.textSm("Last edited on Sep 6, 2023"),
-        //     ),
-        //     div.mb4.fontMedium.text2xl("Title\n  "),
-        //     div.spaceY4(
-        //         p("chime link video interview. share screen 10-15 mins prior to"),
-        //         p("livecode link: pick a language"),
-        //         p("system design link"),
-        //         p("piece of paper handy"),
-        //         p("4 categories: each one diff"),
-        //         ol.ml4.listDecimal(
-        //             li("data structures & algorithms"),
-        //             li("clean & maintainable code"),
-        //             li(
-        //                 "problem solving skills:",
-        //                 ol.ml4.listAlpha(
-        //                     li("asking clarifying questions getting all the data"),
-        //                     li("get all data from interviewer b4 answering"),
-        //                     li("ask all necessary questions"),
-        //                     li("think out loud"),
-        //                     li("talk about optimal solution"),
-        //                 ),
-        //             ),
-        //             li("system design (towards the end)"),
-        //         ),
-        //         p("questions you have"),
-        //         p("share information about latest job not whole career"),
-        //         p("amazon is data driven. data & metrics. impacted x users, et cetera"),
-        //     ),
-        // )
+
         const mainSegment = () => div.mt4.rounded.p4.bgGray300(
-            // div.mb4.itemsCenter.justifyBetween.flex(
-            //     div.spaceX2.itemsCenter.flex(
-            //         button.textGray400(
-            //             i.faBook.fas(
-            //             ),
-            //         ),
-            //         div.fontMedium.textLg("My Notebook"),
-            //     ),
-            //     div.textGray400.textSm("Last edited on Sep 6, 2023"),
-            // ),
-            // div.mb4.fontMedium.text2xl("Title\n  "),
-            /**
-             *                    template(
-                        link({rel:"stylesheet", href:"see.css"} ),
-                        style(
-                            `a {
-                                color: lightblue;
-                                text-decoration: none;
-                            }
-
-                            p {
-                                color: white;
-                            }
-
-                            .markdown-body {
-                                color: white;
-                            }
-                            `
-                        )
-                    ),
-             */
             div.spaceY4(
                 zeroMd(
 
@@ -219,29 +100,6 @@ Hit up one of our members on Twitter/X!
                 `
                     ),
                 )
-                // p("chime link video interview. share screen 10-15 mins prior to"),
-                // p("livecode link: pick a language"),
-                // p("system design link"),
-                // p("piece of paper handy"),
-                // p("4 categories: each one diff"),
-                // ol.ml4.listDecimal(
-                //     li("data structures & algorithms"),
-                //     li("clean & maintainable code"),
-                //     li(
-                //         "problem solving skills:",
-                //         ol.ml4.listAlpha(
-                //             li("asking clarifying questions getting all the data"),
-                //             li("get all data from interviewer b4 answering"),
-                //             li("ask all necessary questions"),
-                //             li("think out loud"),
-                //             li("talk about optimal solution"),
-                //         ),
-                //     ),
-                //     li("system design (towards the end)"),
-                // ),
-                // p("questions you have"),
-                // p("share information about latest job not whole career"),
-                // p("amazon is data driven. data & metrics. impacted x users, et cetera"),
             ),
         )
         const App = () => div.hScreen.flex(
@@ -252,41 +110,22 @@ Hit up one of our members on Twitter/X!
                 mainSegment(),
                 footer.py4.block(
                     div.px4.mxAuto.container(
-                        hr.borderBlueGray200.borderB1.mb4(),
+                        hr.borderGray200.borderB1.mb4(),
                         div.justifyCenter.itemsCenter.flexWrap.flex["md:justify-between"](
                             div.px4.wFull["md:w-4/12"](
-                                div.py1.fontSemibold.textBlueGray500.textSm(
+                                div.py1.fontSemibold.textGray500.textSm(
                                     "Copyright © ",
                                     span({ id: "javascript-date" }, new Date().getFullYear()),
-                                    span.py1.px2.fontSemibold.textSm.textBlueGray500["hover:text-blueGray-700"]({ href: "https://www.you2date.com" },
-                                        "Ben Sobel",
-                                    ),
+                                    span.p3(
+                                    pseudolink("https://www.you2date.com", "Ben Sobel"),
+
+                                    )
+                                    // span.py1.px2.fontSemibold.textSm.textGray500["hover:text-Gray-700"]({ 
+                                    //     href: "https://www.you2date.com" },
+                                    //     "Ben Sobel",
+                                    // ),
                                 ),
                             ),
-                            // div.px4.wFull["md:w-8/12"](
-                            //     ul.justifyCenter.listNone.flexWrap.flex["md:justify-end "](
-                            //         li(
-                            //             a.px3.py1.block.fontSemibold.textSm.textBlueGray600["hover:text-blueGray-800"]({ href: "https://www.creative-tim.com" },
-                            //                 "Creative Tim",
-                            //             ),
-                            //         ),
-                            //         li(
-                            //             a.px3.py1.block.fontSemibold.textSm.textBlueGray600["hover:text-blueGray-800"]({ href: "https://www.creative-tim.com/presentation" },
-                            //                 "About Us",
-                            //             ),
-                            //         ),
-                            //         li(
-                            //             a.px3.py1.block.fontSemibold.textSm.textBlueGray600["hover:text-blueGray-800"]({ href: "http://blog.creative-tim.com" },
-                            //                 "Blog",
-                            //             ),
-                            //         ),
-                            //         li(
-                            //             a.px3.py1.block.fontSemibold.textSm.textBlueGray600["hover:text-blueGray-800"]({ href: "https://github.com/creativetimofficial/tailwind-starter-kit/blob/main/LICENSE.md" },
-                            //                 "MIT License",
-                            //             ),
-                            //         ),
-                            //     ),
-                            // ),
                         ),
                     ),
                 )
