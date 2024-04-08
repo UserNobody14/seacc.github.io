@@ -5,13 +5,23 @@
     <title>SEACC</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+    <link href="/dist/output.css" rel="stylesheet">
     <script type="module" src="https://cdn.jsdelivr.net/gh/zerodevx/zero-md@2/dist/zero-md.min.js"></script>
     <style type="text/css">
         .pseudolink {
             color: #0366d6;
             text-decoration: underline;
             cursor: pointer;
+        }
+        github-md *, github-md p {
+            color: rgb(209 213 219 / var(--tw-text-opacity));;
+        }
+        github-md a {
+            color: #0366d6;
+        }
+        github-md {
+            background-color: black;
         }
     </style>
 
@@ -22,33 +32,41 @@
 
 <body class="text-gray-300 antialiased bg-gray-800">
     <script type="module">
-        import van from 'https://cdn.jsdelivr.net/npm/momvan@1.0.0/dist/index.js';
+        import van from 'https://cdn.jsdelivr.net/npm/momvan@1.0.4/dist/index.js';
 
 
 
 
         const {
-            ol, h1, "zero-md": zeroMd, template, style,
+            ol, h1, "zero-md": zeroMd, md, "github-md": githubMd, template, style,
             a, body, button, canvas, div, footer, form,
             h2, h3, h5, h6, head, hr, html, i, img, input,
             li, link, meta, nav, noscript, p, script, span,
             table, tbody, td, th, thead, title, tr, ul
         } = van.tags;
 
+        const route = van.createRouter();
+        const routeTo = van.routeTo;
+
         const contentSegment = div.pt4.borderGray700.borderT.m3;
-        const pseudolink = (href, text) => span.truncate.textBlue400.textSm["hover:text-blue-300 hover:underline cursor-pointer"]({
+        const pseudolink = (href, text) => a.truncate.textBlue400.textSm["hover:text-blue-300 hover:underline cursor-pointer"]({
                             href,
                             title: href,
                             onclick: () => {
                                 window.location.href = href;
                             }
                         }, text);
-        const titleSegment = () => div.rounded.p4.bgGray700.contentCenter.
+        const titleSegment = () => div.rounded.p4["bg-gray-900/75"].contentCenter.
         itemsCenter.textCenter.justifyCenter.flex(
+            {
+                onclick: () => {
+                    routeTo('main');
+                }
+            },
             h1.text6xl.selfCenter("Seattle E/ACC Meetup")
         )
 
-        const menuSegment = () => div.spaceY4.p4.bgGray900.w64(
+        const menuSegment = () => div.spaceY4.p4.w64.bgGray900(
 
             contentSegment(
                 div.textGray400("Events"),
@@ -80,14 +98,7 @@
             //     div.textSm("Need a little help?\n  "),
             // ),
         );
-
-        const mainSegment = () => div.mt4.rounded.p4.bgGray300(
-            div.spaceY4(
-                zeroMd(
-
-                    script(
-                        { type: "text/markdown" },
-                        `# What's Up?
+        const mdText =   `# What's Up?
 This is the meetup for the Seattle E/ACC group. We plan to meet every month to discuss the latest in our crazy world!
 Currently planning to meet next on 4/9 for a hike. 
 
@@ -98,21 +109,42 @@ Hit up one of our members on Twitter/X!
 - [@thaynekoll](https://twitter.com/thaynekoll) 
 
                 
-                `
-                    ),
-                )
+                `;
+        const mainSegment = () => div.mt4.rounded.p4["bg-gray-900/75"](
+            div.spaceY4(
+                githubMd(mdText)
             ),
-        )
+        );
+        // ["transition-[height] ease-in-out delay-500 duration-1000 h-full hover:h-5 hover:flex-none hover:overflow-hidden hover:flex-row"]
         const App = () => div.hScreen.flex(
             menuSegment(),
-            div.p4.flex1(
-                titleSegment(),
-                // searchSegment(),
-                mainSegment(),
-                footer.py4.block(
+            div.p4.flex1["h-full"].flex.flexCol.bgRepeatX.bgCenter.bgBlendDarken["bg-[url('/assets/eacc.jpg')] bg-black/75"](
+                route.escape('home').addExtraProps({
+                    class: "flex-1 h-full flex flex-col overflow-hidden"
+                })(
+                    div.rounded.flex.flexCol.eaccPattern.
+                    flexAuto.justifyCenter.itemsCenter.gap7.p24
+                    ["transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:drop-shadow-xl cursor-pointer overflow-hidden duration-300"](
+                        {
+                            onclick: () => {
+                                routeTo('main');
+                            }
+                        },
+                        // titleSegment()
+                        h1.text8xl.dropShadowXl("Seattle"),
+                        h1.text6xl.dropShadowXl("E/ACC"),
+                        h1.text8xl.dropShadowXl("Meetup"),
+                    )
+                ),
+                route.not('home')(titleSegment()),
+                route.main(
+                    mainSegment(),
+                ),
+                footer.py4.block.justifySelfEnd.alignSelfEnd.flexNone(
                     div.px4.mxAuto.container(
                         hr.borderGray200.borderB1.mb4(),
-                        div.justifyCenter.itemsCenter.flexWrap.flex["md:justify-between"](
+                        // a("wwwwww"),
+                        div.justifyCenter.itemsCenter.h4.flexWrap.flex["md:justify-between"](
                             div.px4.wFull["md:w-4/12"](
                                 div.py1.fontSemibold.textGray500.textSm(
                                     "Copyright © ",
@@ -132,9 +164,11 @@ Hit up one of our members on Twitter/X!
             document.body,
             App
         );
-
-
+        setTimeout(() => {
+            // render markdown in case it failed
+            renderMarkdown();
+        }, 1000);
     </script>
 </body>
-
+<script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Markdown-Tag/markdown-tag.js"></script> 
 </html>
